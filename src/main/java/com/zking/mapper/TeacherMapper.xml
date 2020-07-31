@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.mapper.TeacherMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.model.Teacher" >
+    <constructor >
+      <idArg column="teacher_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="teacher_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="teacher_sex" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="teacher_address" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="teacher_tel" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    teacher_id, teacher_name, user_id, teacher_sex, teacher_address, teacher_tel
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_teacher
+    where teacher_id = #{teacherId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_teacher
+    where teacher_id = #{teacherId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.model.Teacher" >
+    insert into t_teacher (teacher_id, teacher_name, user_id, 
+      teacher_sex, teacher_address, teacher_tel
+      )
+    values (#{teacherId,jdbcType=INTEGER}, #{teacherName,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
+      #{teacherSex,jdbcType=CHAR}, #{teacherAddress,jdbcType=VARCHAR}, #{teacherTel,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.model.Teacher" >
+    insert into t_teacher
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="teacherId != null" >
+        teacher_id,
+      </if>
+      <if test="teacherName != null" >
+        teacher_name,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="teacherSex != null" >
+        teacher_sex,
+      </if>
+      <if test="teacherAddress != null" >
+        teacher_address,
+      </if>
+      <if test="teacherTel != null" >
+        teacher_tel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="teacherId != null" >
+        #{teacherId,jdbcType=INTEGER},
+      </if>
+      <if test="teacherName != null" >
+        #{teacherName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="teacherSex != null" >
+        #{teacherSex,jdbcType=CHAR},
+      </if>
+      <if test="teacherAddress != null" >
+        #{teacherAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherTel != null" >
+        #{teacherTel,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.model.Teacher" >
+    update t_teacher
+    <set >
+      <if test="teacherName != null" >
+        teacher_name = #{teacherName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="teacherSex != null" >
+        teacher_sex = #{teacherSex,jdbcType=CHAR},
+      </if>
+      <if test="teacherAddress != null" >
+        teacher_address = #{teacherAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherTel != null" >
+        teacher_tel = #{teacherTel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where teacher_id = #{teacherId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.model.Teacher" >
+    update t_teacher
+    set teacher_name = #{teacherName,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      teacher_sex = #{teacherSex,jdbcType=CHAR},
+      teacher_address = #{teacherAddress,jdbcType=VARCHAR},
+      teacher_tel = #{teacherTel,jdbcType=VARCHAR}
+    where teacher_id = #{teacherId,jdbcType=INTEGER}
+  </update>
+</mapper>

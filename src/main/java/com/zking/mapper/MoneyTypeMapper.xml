@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.mapper.MoneyTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.model.MoneyType" >
+    <constructor >
+      <idArg column="mt_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="mt_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    mt_id, mt_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_money_type
+    where mt_id = #{mtId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_money_type
+    where mt_id = #{mtId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.model.MoneyType" >
+    insert into t_money_type (mt_id, mt_name)
+    values (#{mtId,jdbcType=INTEGER}, #{mtName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.model.MoneyType" >
+    insert into t_money_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mtId != null" >
+        mt_id,
+      </if>
+      <if test="mtName != null" >
+        mt_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mtId != null" >
+        #{mtId,jdbcType=INTEGER},
+      </if>
+      <if test="mtName != null" >
+        #{mtName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.model.MoneyType" >
+    update t_money_type
+    <set >
+      <if test="mtName != null" >
+        mt_name = #{mtName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where mt_id = #{mtId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.model.MoneyType" >
+    update t_money_type
+    set mt_name = #{mtName,jdbcType=VARCHAR}
+    where mt_id = #{mtId,jdbcType=INTEGER}
+  </update>
+</mapper>
