@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.mapper.MoneyApplyMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.model.MoneyApply" >
+    <constructor >
+      <idArg column="ma_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="sm_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="tc_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="student_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="staff_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="auditdate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="disposedate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="applydate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ma_id, sm_id, tc_id, student_id, staff_id, auditdate, disposedate, applydate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_money_apply
+    where ma_id = #{maId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_money_apply
+    where ma_id = #{maId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.model.MoneyApply" >
+    insert into t_money_apply (ma_id, sm_id, tc_id, 
+      student_id, staff_id, auditdate, 
+      disposedate, applydate)
+    values (#{maId,jdbcType=INTEGER}, #{smId,jdbcType=INTEGER}, #{tcId,jdbcType=INTEGER}, 
+      #{studentId,jdbcType=INTEGER}, #{staffId,jdbcType=INTEGER}, #{auditdate,jdbcType=TIMESTAMP}, 
+      #{disposedate,jdbcType=TIMESTAMP}, #{applydate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.model.MoneyApply" >
+    insert into t_money_apply
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="maId != null" >
+        ma_id,
+      </if>
+      <if test="smId != null" >
+        sm_id,
+      </if>
+      <if test="tcId != null" >
+        tc_id,
+      </if>
+      <if test="studentId != null" >
+        student_id,
+      </if>
+      <if test="staffId != null" >
+        staff_id,
+      </if>
+      <if test="auditdate != null" >
+        auditdate,
+      </if>
+      <if test="disposedate != null" >
+        disposedate,
+      </if>
+      <if test="applydate != null" >
+        applydate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="maId != null" >
+        #{maId,jdbcType=INTEGER},
+      </if>
+      <if test="smId != null" >
+        #{smId,jdbcType=INTEGER},
+      </if>
+      <if test="tcId != null" >
+        #{tcId,jdbcType=INTEGER},
+      </if>
+      <if test="studentId != null" >
+        #{studentId,jdbcType=INTEGER},
+      </if>
+      <if test="staffId != null" >
+        #{staffId,jdbcType=INTEGER},
+      </if>
+      <if test="auditdate != null" >
+        #{auditdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="disposedate != null" >
+        #{disposedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applydate != null" >
+        #{applydate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.model.MoneyApply" >
+    update t_money_apply
+    <set >
+      <if test="smId != null" >
+        sm_id = #{smId,jdbcType=INTEGER},
+      </if>
+      <if test="tcId != null" >
+        tc_id = #{tcId,jdbcType=INTEGER},
+      </if>
+      <if test="studentId != null" >
+        student_id = #{studentId,jdbcType=INTEGER},
+      </if>
+      <if test="staffId != null" >
+        staff_id = #{staffId,jdbcType=INTEGER},
+      </if>
+      <if test="auditdate != null" >
+        auditdate = #{auditdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="disposedate != null" >
+        disposedate = #{disposedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applydate != null" >
+        applydate = #{applydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ma_id = #{maId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.model.MoneyApply" >
+    update t_money_apply
+    set sm_id = #{smId,jdbcType=INTEGER},
+      tc_id = #{tcId,jdbcType=INTEGER},
+      student_id = #{studentId,jdbcType=INTEGER},
+      staff_id = #{staffId,jdbcType=INTEGER},
+      auditdate = #{auditdate,jdbcType=TIMESTAMP},
+      disposedate = #{disposedate,jdbcType=TIMESTAMP},
+      applydate = #{applydate,jdbcType=TIMESTAMP}
+    where ma_id = #{maId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.mapper.FinancedetailMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.model.Financedetail" >
+    <constructor >
+      <idArg column="fd_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="fd_date" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="fd_type" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="fd_info" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="staff_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    fd_id, fd_date, fd_type, fd_info, staff_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_financedetail
+    where fd_id = #{fdId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_financedetail
+    where fd_id = #{fdId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.model.Financedetail" >
+    insert into t_financedetail (fd_id, fd_date, fd_type, 
+      fd_info, staff_id)
+    values (#{fdId,jdbcType=INTEGER}, #{fdDate,jdbcType=TIMESTAMP}, #{fdType,jdbcType=VARCHAR}, 
+      #{fdInfo,jdbcType=VARCHAR}, #{staffId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.model.Financedetail" >
+    insert into t_financedetail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fdId != null" >
+        fd_id,
+      </if>
+      <if test="fdDate != null" >
+        fd_date,
+      </if>
+      <if test="fdType != null" >
+        fd_type,
+      </if>
+      <if test="fdInfo != null" >
+        fd_info,
+      </if>
+      <if test="staffId != null" >
+        staff_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fdId != null" >
+        #{fdId,jdbcType=INTEGER},
+      </if>
+      <if test="fdDate != null" >
+        #{fdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fdType != null" >
+        #{fdType,jdbcType=VARCHAR},
+      </if>
+      <if test="fdInfo != null" >
+        #{fdInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="staffId != null" >
+        #{staffId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.model.Financedetail" >
+    update t_financedetail
+    <set >
+      <if test="fdDate != null" >
+        fd_date = #{fdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fdType != null" >
+        fd_type = #{fdType,jdbcType=VARCHAR},
+      </if>
+      <if test="fdInfo != null" >
+        fd_info = #{fdInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="staffId != null" >
+        staff_id = #{staffId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where fd_id = #{fdId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.model.Financedetail" >
+    update t_financedetail
+    set fd_date = #{fdDate,jdbcType=TIMESTAMP},
+      fd_type = #{fdType,jdbcType=VARCHAR},
+      fd_info = #{fdInfo,jdbcType=VARCHAR},
+      staff_id = #{staffId,jdbcType=INTEGER}
+    where fd_id = #{fdId,jdbcType=INTEGER}
+  </update>
+</mapper>
